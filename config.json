@@ -2,8 +2,8 @@
   "params":{
     "blog_name": "Tech Blog",
     "local_server": "True",
-    "local_uri": "mysql+mysqlconnector://root:@localhost/tech_blog",
-    "prod_uri": "mysql+mysqlconnector://root:@localhost/tech_blog",
+    "local_uri": "mysql+mysqlconnector://root:@localhost/coding_fame",
+    "prod_uri": "mysql+mysqlconnector://root:@localhost/coding_fame",
     "twitter_url": "https://www.twitter.com/",
     "fb_url":"https://www.facebook.com/",
     "github_url": "https://www.github.com/",
