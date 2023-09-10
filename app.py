@@ -1,7 +1,7 @@
 import math
 import os
 
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from werkzeug.utils import secure_filename
@@ -52,13 +52,13 @@ class Posts(db.Model):
 @app.route('/')
 def home():
     posts = Posts.query.filter_by().all()
-    last = math.ceil(len(posts)/int(params['no_of_post']))
+    last = math.ceil(len(posts) / int(params['no_of_post']))
     page = request.args.get('page')
     if not str(page).isnumeric():
         page = 1
     page = int(page)
     no_of_post = int(params['no_of_post'])
-    posts = posts[(page-1)*no_of_post:(page-1)*no_of_post+no_of_post]
+    posts = posts[(page - 1) * no_of_post:(page - 1) * no_of_post + no_of_post]
     if page == 1:
         prev = "#"
         next1 = "/?page=" + str(page + 1)
@@ -89,7 +89,7 @@ def logout():  # put application's code here
     return redirect('/dashboard')
 
 
-@app.route('/delete/<string:sno>',methods=["GET","POST"])
+@app.route('/delete/<string:sno>', methods=["GET", "POST"])
 def delete(sno):  # put application's code here
     if 'user' in session and session['user'] == params['admin_username']:
         post = Posts.query.filter_by(sno=sno).first()
@@ -149,7 +149,7 @@ def edit(sno):
                 db.session.commit()
                 return redirect('/edit/' + sno)
     post = Posts.query.filter_by(sno=sno).first()
-    return render_template('edit.html', params=params, post=post)
+    return render_template('edit.html', params=params, post=post, sno=sno)
 
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -162,11 +162,12 @@ def contact():  # put application's code here
         entry = Contacts(name=name, phone_num=phone, mes=message, date=datetime.now(), email=email)
         db.session.add(entry)
         db.session.commit()
-        mail.send_message('New Message From ' + name,
-                          sender=email,
-                          recipients=[params['gmail-username']],
-                          body=message + "\n" + phone
-                          )
+        # mail.send_message('New Message From ' + name,
+        #                   sender=email,
+        #                   recipients=[params['gmail-username']],
+        #                   body=message + "\n" + phone
+        #                   )
+        flash("Thanks for Submitting your details", "Success:")
 
     return render_template('contact.html', params=params)
 
