@@ -1,0 +1,18 @@
+{
+  "params":{
+    "blog_name": "Tech Blog",
+    "local_server": "True",
+    "local_uri": "mysql+mysqlconnector://root:@localhost/tech_blog",
+    "prod_uri": "mysql+mysqlconnector://root:@localhost/tech_blog",
+    "twitter_url": "https://www.twitter.com/",
+    "fb_url":"https://www.facebook.com/",
+    "github_url": "https://www.github.com/",
+    "gmail-username": "admin@gmail.com",
+    "gmail-password": "adminadmin",
+    "author": "Ankur Bansal",
+    "no_of_post": 5,
+    "admin_username": "ankur@admin.com",
+    "admin_password": "ankurbansal",
+    "upload_location":""
+  }
+}
